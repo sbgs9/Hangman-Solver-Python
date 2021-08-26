@@ -85,10 +85,9 @@ def main():
     sol = data.json()['solution']
     if num_incorrect == 7:
         print("Guess we couldn't solve this one! We'll get it next time!")
-        print('The solution was: ' + sol)
     else:
         print('WE GOT IT! THE CORRECT WORD IS: ' + word_preview)
-        print('The solution was: ' + sol)
+    print('The solution was: ' + sol)    
         
 
 if __name__ == '__main__':
