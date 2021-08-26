@@ -1,11 +1,10 @@
-# TODO: Fix issue where driver doesn't work when the first letter guessed is wrong
 import requests
 import json
 from collections import Counter
 
 # gets base frequency list. Returns Counter object
 def get_frequencies(length):
-    words = open('words.txt', 'r')
+    words = open('words_processed.txt', 'r')
     lines = words.readlines()
     freqs = Counter()
     for line in lines:
@@ -15,7 +14,7 @@ def get_frequencies(length):
 
 # gets filtered list of letters. Returns Counter object
 def get_filtered_frequencies(length, doesnt_contain, contains):
-    words = open('words.txt', 'r')
+    words = open('words_processed.txt', 'r')
     lines = words.readlines()
     freqs = Counter()
     if len(doesnt_contain) != 0 and len(contains) == 0:
@@ -29,6 +28,8 @@ def get_filtered_frequencies(length, doesnt_contain, contains):
                     if num_occurrances(line.strip(), letter) == count:
                         freqs += Counter(line.strip())
     return freqs
+# gets the number of occurrances of a letter in a word
+# returns the count as an integer    
 def num_occurrances(word, letter):
     count = 0
     for char in word:
@@ -36,6 +37,8 @@ def num_occurrances(word, letter):
             count += 1
     return count
 
+# gets the indices of all of the occurrances of a letter in a word
+# returns a list of the indices of the occurrances of the letter in the word
 def get_indices(word, letter):
     return [i for i, ltr in enumerate(word) if ltr == letter]
 

@@ -1,19 +1,23 @@
 def to_lower():
-    words = open('words.txt', 'w+')
+    words = open('words.txt', 'r+')
+    #new_words = open('words_processed.txt', 'r+')
     lines = words.readlines()
-    for line in lines:
-        curr_word = line.strip()
+    for index in range(len(lines)):
+        curr_word = lines[index].strip()
         lower_word = curr_word.lower()
-        line = lower_word
+        lines[index] = lower_word + '\n'
+    return lines
+        #new_words.write(lines[index] + '\n')
 
 def remove_duplicates():
-    uniqlines = set(open('words.txt').readlines())
-    new_words = open('newwords.txt', 'w+')
-    new_words.writelines(set(uniqlines))
-    new_words.close()
+    uniqlines = set(to_lower())
+    new_words = open('words_processed.txt', 'r+')
+    for line in uniqlines:
+        new_words.write(line)
+
 
 def main():
-    to_lower()
+    remove_duplicates()
 
 if __name__ == "__main__":
     main()
