@@ -70,19 +70,22 @@ def main():
             resp = guess.json()
             if resp['correct'] == False:
                 doesnt_contain.append((letter, 0))
-                #print('Guess was wrong')
                 num_incorrect += 1
                 break
             elif resp['correct'] == True:
                 contains.append((letter, len(get_indices(resp['hangman'], letter))))
                 for index in get_indices(resp['hangman'], letter):
                     word_preview = word_preview[:index] + letter + word_preview[index+1:]
-                print(word_preview)
-                #print('Guess was correct')
+            print(word_preview)
+
+    data = requests.get(url, {'token':token})
+    sol = data.json()['solution']
     if num_incorrect == 7:
         print("Guess we couldn't solve this one! We'll get it next time!")
+        print('The solution was: ' + sol)
     else:
         print('WE GOT IT! THE CORRECT WORD IS: ' + word_preview)
+        print('The solution was: ' + sol)
         
 
 if __name__ == '__main__':
